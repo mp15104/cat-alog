@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<title>Cat-Alog</title>
+<style>
+  @font-face {
+    font-family: howcute;
+    src: url(HowCute-gylP.ttf);
+  }
+  img {
+      border: 5px solid lightblue;
+      max-width: 40%;
+      height: auto;      
+  }
+  body{
+      background-image: url("catbg.jpg")
+  }
+  a {
+    color: white;
+  }
+  h1{
+      margin: auto;
+      width: 50%;
+      border: 3px solid pink;
+      padding: 10px;
+      background-color: pink;
+  }
+  h2{
+      font-family: howcute;
+      font-size:medium;
+      color:white;
+      background: lightcoral;
+      line-height:150%;
+  }
+</style>
+
+
+<h1>
+<div><center>    
+    <form action="/">
+        <input type="submit" value="Home" />
+    </form>
+    <form action="/custom">
+        <input type="submit" value="Custom Cat" />
+    </form> 
+    <form action="/users">
+        <input type="submit" value="Users (Admin Only)" />
+    </form> 
+   {{#each customcats}}
+    <center>
+    <h1>
+        <div>
+            <img src={{this.image}}></img>
+        </div></h1>
+        <h2>
+            <a href={{this.link}}>{{this.name}}</a>
+            <p>Temperament: {{this.temperament}}</p> 
+        </h2>
+    </center>
+	{{/each}}
+   {{#each cats}}
+    <center>
+    <h1>
+        <div>
+            <img src={{this.image}}></img>
+        </div></h1>
+        <h2>
+            <a href={{this.link}}>{{this.name}}</a>
+            <p>Temperament: {{this.temperament}}</p> 
+        </h2>
+    </center>
+	{{/each}}
+    <center> 
+    <form action="/">
+        <input type="submit" value="Home" />
+    </form>   </center>  
+</h1>
+</div>
+</html>

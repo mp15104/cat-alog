@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cat-Alog</title>
+<style>
+  @font-face {
+    font-family: howcute;
+    src: url(HowCute-gylP.ttf);
+  }
+  img {
+      border: 5px solid lightblue;
+      max-width: 40%;
+      height: auto;      
+  }
+  body{
+      background-image: url("catbg.jpg")
+  }
+  a {
+    color: white;
+  }
+  h1{
+      margin: auto;
+      width: 50%;
+      border: 3px solid pink;
+      padding: 10px;
+      background-color: pink;
+  }
+  h2{
+      font-family: howcute;
+      font-size:medium;
+      color:white;
+      background: lightcoral;
+      line-height:150%;
+  }
+</style>
+</head>
+<body>
+<h1>
+<center>
+    <div id="custom_cat_form">
+        <h2>
+        <img id="cat_image" src={{image}}></img>
+        <br>
+        <label for="cat_name">{{name}}</label>
+        <input type="text" id="cat_name">
+        <br>
+        <label for="cat_temperament">{{temperament}}</label>
+        <input type="text" id="cat_temperament">
+        <br>
+        <label for="cat_wiki_link">{{link}}</label>
+        <input type="text" id="cat_wiki_link">
+        <br>
+        <button id="submitCat">Submit</button>
+        <form action="/index">
+            <input type="submit" value="Exit" />
+        </form> 
+        <button id="reload">Reload for new image</button>
+    </h2></div></center></center></h1>
+        
+<script type="application/javascript">
+    function pushCatData(){
+        let catImage = document.getElementById('cat_image').src;
+        let temperament = document.getElementById('cat_temperament').value;
+        let catName = document.getElementById('cat_name').value;
+        let link = document.getElementById('cat_wiki_link').value;
+        fetch('/submitCat', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            catImage: catImage,
+            catName: catName,
+            temperament: temperament,
+            link: link,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Submission successful:', data);
+            window.location.href = "/index";
+        })
+        .catch(function(error) {
+        console.log(error);
+        });
+    }
+
+    function reloadPage() {
+        location.reload();
+    }
+
+    document.getElementById("submitCat").addEventListener("click", pushCatData);
+    document.getElementById("reload").addEventListener("click", reloadPage);
+</script>
+</body>
+</html>

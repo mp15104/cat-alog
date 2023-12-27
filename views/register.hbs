@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <title>Cat-Alog</title>
+<style>
+  @font-face {
+    font-family: howcute;
+    src: url(HowCute-gylP.ttf);
+  }
+  img {
+      border: 5px solid lightblue;
+      max-width: 40%;
+      height: auto;      
+  }
+  body{
+      background-image: url("catbg.jpg")
+  }
+  a {
+    color: white;
+  }
+  h1{
+      margin: auto;
+      width: 50%;
+      border: 3px solid pink;
+      padding: 10px;
+      background-color: pink;
+  }
+  h2{
+      font-family: howcute;
+      font-size:medium;
+      color:white;
+      background: lightcoral;
+      line-height:150%;
+  }
+</style>
+
+
+<h1>
+<center>
+    <div id="custom_registration_form">
+        <h2>
+        <label for="username">Username</label>
+        <input type="text" id="username">
+        <br>
+        <label for="password">Password</label>
+        <input type="text" id="password">
+        <br>
+        <button id="r">Register</button>
+        <form action="/">
+            <input type="submit" value="Exit" />
+        </form> 
+    </div></center>
+</center></h1>
+     
+<script type="application/javascript">
+    function regis(){
+        let username = document.getElementById('username').value;
+        let password = document.getElementById('password').value;
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+            username: username,
+            password: password,
+            }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Registration successful!")
+            console.log('Submission successful:', data);
+            window.location.href = "/";
+        })
+        .catch(function(error) {
+        console.log(error);
+        });
+    }
+    document.getElementById("r").addEventListener("click", regis);
+</script>
+</html>
